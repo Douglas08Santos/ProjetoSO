@@ -3,17 +3,13 @@ Repositorio para o projeto de sistema operacional - Calcular soma e multiplicaç
 
 
 TODO
-gerador de matrizes randomicas para testes
-  - em andamento...
-codigo com soma classica
-  - OK
-codigo com multiplicação classica
-  - OK
-codigo com soma usando threads
-  - OK
-codigo com multiplicação thread
-  - OK
-codigo com soma usando processos
-  - OK
-codigo com multiplicação usando processos
-  - exibir corretamente a matriz resultado usando processos
+
+Gerador de matrizes randomicas para testes (em andamento...)
+
+Codigo com soma classica(OK)<br />
+Codigo com multiplicação classica(OK)<br /> 
+Codigo com soma usando threads(OK)<br />
+Codigo com multiplicação thread(OK)<br />
+Codigo com soma usando processos(OK)<br />
+Codigo com multiplicação usando processos - Falta exibir corretamente a matriz resultado usando processos
+
