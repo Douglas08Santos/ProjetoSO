@@ -35,14 +35,19 @@ matrizB = [
     [1, 2],
     [3, 4]
 ]
+if(len(matrizA) == len(matrizB) and len(matriz[0]) == len(matrizB[0])):
+    memoria = posix_ipc.SharedMemory('matrizR', flags = posix_ipc.O_CREAT, mode = 0o777, size = 16)
+    matrizR = mmap.mmap(memoria.fd, memoria.size)
+    memoria.close_fd()
+    unroll([matrizA, matrizB], func, 'thre', matrizR)
+    unroll([matrizA, matrizB], func, 'proc', matrizR)
 
-memoria = posix_ipc.SharedMemory('matrizR', flags = posix_ipc.O_CREAT, mode = 0o777, size = 16)
-matrizR = mmap.mmap(memoria.fd, memoria.size)
-memoria.close_fd()
-unroll([matrizA, matrizB], func, 'thre', matrizR)
-unroll([matrizA, matrizB], func, 'proc', matrizR)
+    print(struct.unpack('iiii', matrizR))
 
-print(struct.unpack('iiii', matrizR))
-
-matrizR.close()
-posix_ipc.unlink_shared_memory('matrizR')
+    matrizR.close()
+    posix_ipc.unlink_shared_memory('matrizR')
+    
+else:
+    print("O #linhas, ou o #colunas, entre as matrizes são diferentes",
+         "Linhas: ", len(matrizA), ", ", len(matrizB),
+          "Colunas: ", len(matriz[0]), ", ", len(matrizB[0]))                                                 
