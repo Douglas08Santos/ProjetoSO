@@ -32,7 +32,7 @@ def multiplyMatrix(matrix1, matrix2):
 	nRowMatrix2 = len(matrix2)
 	if (nColumnMatrix1 == nRowMatrix2):
 		#Criar uma matriz nula que se tornará a matriz resultante
-		matrixR = makeMatrix(nRowMatrix2, nColumnMatrix1)
+		matrixR = makeMatrix(len(matriz1), len(matriz2[0]))
 
 		#Operação de multiplicação
 		for i in range(len(matrix1)):
