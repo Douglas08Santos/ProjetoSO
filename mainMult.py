@@ -40,18 +40,19 @@ matrizB = [
 ]
 ''' A multiplicação de matrizes é realizada de acordo com a seguinte condição: 
 o número de colunas da 1ª matriz deve ser igual ao número de linhas da 2ª matriz. '''
-
+tamMatrizR = len(matrizA)*len(matrizB[0])
 if(len(matrizA[0]) == len(matrizB)):
-    memoria = posix_ipc.SharedMemory('matrizR', flags = posix_ipc.O_CREAT, mode = 0o777, size = 16)
+    memoria = posix_ipc.SharedMemory('matrizR', flags = posix_ipc.O_CREAT, mode = 0o777, size = tamMatrizR*4)
     matrizR = mmap.mmap(memoria.fd, memoria.size)
     memoria.close_fd()
+    #time_start
     unroll([matrizA, matrizB], func, 'thre', matrizR)
     unroll([matrizA, matrizB], func, 'proc', matrizR)
-
+    #time_stop
     print(struct.unpack('iiii', matrizR))
 
     matrizR.close()
     posix_ipc.unlink_shared_memory('matrizR')
 else:
     print("Para realizar a multiplicação: #colunas de A deve ser igual ao #linhas de B",
-         len(matrizA[0]), " != ", len(matrizB))
+         len(matrizA[0]), " != ", len(matrizB))1
