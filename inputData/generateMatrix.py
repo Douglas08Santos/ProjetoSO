@@ -14,24 +14,29 @@ Para executar:
 	python3 generateMatrix.py <numero de linhas> <numero de colunas>
 
 '''
-elem = list(range(0, 9))
+class GenerateMatrix(object):
+	"""docstring for ClassName"""
+	def generateMatrix(self, row=0, col=0):
+		elem = list(range(0, 9))
+		matrizCreated = ""
+		outFilename = "inputData/matriz"+str(row) +"x"+ str(col)+".csv" 
+		for x in range(0,row):
+			for y in range(0,col):
+				matrizCreated += str(random.choice(elem))
+				if y != col-1:
+					matrizCreated += ","
+			matrizCreated +="\n"
 
-def generateMatriz(row, col, filename):
-	matrizCreated = ""
-	for x in range(0,row):
-		for y in range(0,col):
-			matrizCreated += str(random.choice(elem))
-			if y != col-1:
-				matrizCreated += ","
-		matrizCreated +="\n"
+		print(matrizCreated)
 
-	print(matrizCreated)
-
-	outputfile = open(filename, "w+")
-	outputfile.write(matrizCreated)
-	outputfile.close()
-
-qtdRow = int(sys.argv[1])
-qtdCol = int(sys.argv[2])
-outputfile = "matriz"+str(qtdRow) +"x"+ str(qtdCol)+".csv" 
-generateMatriz(qtdRow, qtdCol, outputfile)
+		output = open(outFilename, "w+")
+		output.write(matrizCreated)
+		output.close()
+		
+def main():
+	if len(sys.argv) == 3:
+		qtdRow = int(sys.argv[1])
+		qtdCol = int(sys.argv[2])
+	
+	generate = GenerateMatrix()
+	generate.generateMatrix(qtdRow, qtdCol)

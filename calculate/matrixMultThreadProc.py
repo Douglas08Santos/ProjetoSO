@@ -7,7 +7,7 @@ import posix_ipc
 import threading
 
 
-def atualizarVariavelDeInstanciasCompartilhada():
+def refreshVariable():
     semaforo.acquire()
     instancias.seek(0)
     valor = struct.unpack('i', instancias.read(4))[0]
@@ -22,7 +22,7 @@ def func(mR, mA, mB, i, j):
     for k in range(len(mB)):
         result += mA[i][k] * mB[k][j] 
     mR.write(struct.pack('i', result))
-    atualizarVariavelDeInstanciasCompartilhada()
+    refreshVariable()
 
 def unroll(args, func, method, results):
     if method == 'proc':

@@ -5,9 +5,11 @@ import signal
 import struct
 import posix_ipc
 import threading
+import sys
 
 
-def atualizarVariavelDeInstanciasCompartilhada():
+# atualiza a variavel de instancias compartilhada
+def refreshVariable():
     semaforo.acquire()
     instancias.seek(0)
     valor = struct.unpack('i', instancias.read(4))[0]
@@ -19,7 +21,7 @@ def atualizarVariavelDeInstanciasCompartilhada():
 def func(mR, mA, mB, i, j):
     mR.seek((i * len(mA[i]) + j) * 4)
     mR.write(struct.pack('i', mA[i][j] + mB[i][j]))
-    atualizarVariavelDeInstanciasCompartilhada()
+    refreshVariable()
     
 
 def unroll(args, func, method, results):
