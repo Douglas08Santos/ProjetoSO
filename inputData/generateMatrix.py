@@ -1,7 +1,19 @@
 #Gerador de Matrizes
 import random
 import csv
+import sys
 
+'''
+TODO:
+criar matriz -> OK
+adicionar em uma string -> OK
+adicionar a string em um aquivo csv -> OK
+usar args para configurar o tamanho da matriz -> OK
+
+Para executar:
+	python3 generateMatrix.py <numero de linhas> <numero de colunas>
+
+'''
 elem = list(range(0, 9))
 
 def generateMatriz(row, col, filename):
@@ -18,7 +30,8 @@ def generateMatriz(row, col, filename):
 	outputfile = open(filename, "w+")
 	outputfile.write(matrizCreated)
 	outputfile.close()
-qtdRow = 3
-qtdCol = 3
+
+qtdRow = int(sys.argv[1])
+qtdCol = int(sys.argv[2])
 outputfile = "matriz"+str(qtdRow) +"x"+ str(qtdCol)+".csv" 
 generateMatriz(qtdRow, qtdCol, outputfile)
