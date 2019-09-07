@@ -58,6 +58,7 @@ instancias.seek(0)
 instancias.write(struct.pack('i', len(matrizA) * len(matrizA[0])))
 semaforo = posix_ipc.Semaphore("test_sem", flags = posix_ipc.O_CREAT, mode = 0o777,  initial_value=1)
 
+#main 
 if(len(matrizA) == len(matrizB) and len(matrizA[0]) == len(matrizB[0])):
     memoria = posix_ipc.SharedMemory('matrizR', flags = posix_ipc.O_CREAT, mode = 0o777, size = 16)
     matrizR = mmap.mmap(memoria.fd, memoria.size)

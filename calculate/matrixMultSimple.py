@@ -5,11 +5,12 @@ class SimpleMult(object):
 	#Multiplicação de matrizes 
 	def multMatrix(self, matrix1, matrix2):
 		#Condição para multiplicação
-		#Se o #colunas da matrix1 eh igual ao #linhas matrix2
+		#Se o numColunas da matrix1 eh igual ao numLinhas matrix2
 		nRowMatrix1 = len(matrix1)
 		nColumnMatrix1 = len(matrix1[0])
 		nRowMatrix2 = len(matrix2)
 		nColumnMatrix2 = len(matrix2[0])
+
 		if (nColumnMatrix1 == nRowMatrix2):
 			#Criar uma matriz nula que se tornará a matriz resultante
 			matrixR = list(makeMatriz.MakeMatriz().makeNullMatrix(nRowMatrix1, nColumnMatrix2))

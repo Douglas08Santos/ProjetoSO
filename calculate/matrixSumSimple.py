@@ -11,7 +11,7 @@ class SimpleSum(object):
 		nColumn1 = len(list(matrix1[0]))
 		nRow2 = len(list(matrix2))
 		nColumn2 = len(list(matrix2[0]))
-
+		#Verifica se atende a condição para se realizar
 		if (nRow1 == nRow2 and nColumn1 == nColumn2):
 			matrixR = list(makeMatriz.MakeMatriz().makeNullMatrix(nRow1, nColumn1))
 			for i in range(nRow1):
