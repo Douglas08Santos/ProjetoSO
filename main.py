@@ -43,7 +43,7 @@ if len(sys.argv) == 2:
 		matrizA = readMatriz(inputData)
 		matrizB = readMatriz(inputData)
 		result = []
-		avegareTime = []
+		avegareTime = [] 
 		#print(matrizA)
 		#print(matrizB)
 		for i in range(5):
