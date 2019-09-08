@@ -77,7 +77,7 @@ class SumThreadProc(object):
                     break
                 self.sem.release()
             #O problema que faltar está aqui
-            size = 'i'*(sizeMatrixR)
+            size = 'i'*(int(sizeMatrixR / 4))
             print("mr: ", matrixR.size())
             print("size: ",len(size))
             result = list(struct.unpack(size, matrixR))
