@@ -3,7 +3,7 @@ from makeMatriz import makeMatriz
 class SimpleSum(object):
 	"""docstring for SimpleSum"""
 	#Soma de matrizes
-	def SumMatrix(self, matrix1, matrix2):
+	def sumMatrix(self, matrix1, matrix2):
 		#Condição para a soma
 		#As matrizes devem ser do mesmo tamanho
 		#Mesma quantidade de linhas e de colunas
