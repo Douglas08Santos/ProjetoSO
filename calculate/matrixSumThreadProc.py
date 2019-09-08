@@ -38,6 +38,7 @@ class SumThreadProc(object):
 
 
     def unroll(self, args, func, method, results):
+        print("em unroll")
         if method == "proc":
             for i in range(0, len(args[0])):
                 for j in range(0, len(args[0][0])):
@@ -78,10 +79,8 @@ class SumThreadProc(object):
                 self.sem.release()
             #O problema que faltar está aqui
             size = 'i'*(int(sizeMatrixR / 4))
-            print("mr: ", matrixR.size())
-            print("size: ",len(size))
             result = list(struct.unpack(size, matrixR))
-            print("ListR: ",result)
+            #print("ListR: ",result)
             
 
             matrixR.close()
@@ -109,6 +108,7 @@ class SumThreadProc(object):
             
            
             self.unroll([matrixA, matrixB], self.func, 'proc', matrixR)
+            print("chamando unroll")
             while True:
                 self.sem.acquire()
                 self.instances.seek(0)

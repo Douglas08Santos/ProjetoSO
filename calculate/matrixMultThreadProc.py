@@ -85,8 +85,8 @@ class MultThreadProc(object):
                     break
                 self.sem.release()
           
-            listR = list(struct.unpack('iiii', matrixR))
-            print("ListR: ",listR)
+            size = 'i'*(int(sizeMatrixR / 4))
+            result = list(struct.unpack(size, matrixR))
             
 
             matrixR.close()
@@ -122,9 +122,8 @@ class MultThreadProc(object):
                     break
                 self.sem.release()
           
-            result = list(struct.unpack('iiii', matrixR))
-            print("ListR: ",result)
-            
+            size = 'i'*(int(sizeMatrixR / 4))
+            result = list(struct.unpack(size, matrixR))
 
             matrixR.close()
             posix_ipc.unlink_shared_memory('matrixR')
