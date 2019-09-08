@@ -19,7 +19,7 @@ class GenerateMatrix(object):
 	def generateMatrix(self, row=0, col=0):
 		elem = list(range(0, 9))
 		matrizCreated = ""
-		outFilename = "inputData/matriz"+str(row) +"x"+ str(col)+".csv" 
+		outFilename = "matriz"+str(row) +"x"+ str(col)+".csv" 
 		for x in range(0,row):
 			for y in range(0,col):
 				matrizCreated += str(random.choice(elem))
@@ -27,7 +27,7 @@ class GenerateMatrix(object):
 					matrizCreated += ","
 			matrizCreated +="\n"
 
-		print(matrizCreated)
+		#print(matrizCreated)
 
 		output = open(outFilename, "w+")
 		output.write(matrizCreated)
@@ -40,3 +40,5 @@ def main():
 	
 	generate = GenerateMatrix()
 	generate.generateMatrix(qtdRow, qtdCol)
+
+#main()
