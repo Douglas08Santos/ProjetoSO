@@ -117,8 +117,8 @@ class SumThreadProc(object):
                     self.sem.release()
                     break
                 self.sem.release()
-          
-            result = list(struct.unpack('iiii', matrixR))
+            size = 'i'*(int(sizeMatrixR / 4))
+            result = list(struct.unpack(size, matrixR))
             #print("ListR: ",result)
             
 
