@@ -32,6 +32,9 @@ def procSum(matrizA, matrizB):
 def threadMult(matrizA, matrizB):
 	sizeReturn = len(matrizA)*len(matrizA[0])
 	return list(matrixMultThreadProc.MultThreadProc(sizeReturn).multThread(matrizA, matrizB))
+def procMult(matrizA, matrizB):
+	sizeReturn = len(matrizA)*len(matrizA[0])
+	return list(matrixMultThreadProc.MultThreadProc(sizeReturn).multProc(matrizA, matrizB))
 
 def main(mode, matrizA, matrizB):
 	matrizR = None
@@ -52,7 +55,7 @@ def main(mode, matrizA, matrizB):
 
 	return matrizR
 
-inputMatriz = list(range(100, 1600, 100))
+inputMatriz = list(range(10, 55, 5))
 if len(sys.argv) == 2:
 	mode = sys.argv[1]
 	print(mode)	

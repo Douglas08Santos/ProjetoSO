@@ -34,11 +34,13 @@ class GenerateMatrix(object):
 		output.close()
 		
 def main():
-	if len(sys.argv) == 3:
+	tam = list(range(10, 55, 5))
+	generate = GenerateMatrix()
+	for i in tam:		
+		generate.generateMatrix(i, i)
+	'''if len(sys.argv) == 3:
 		qtdRow = int(sys.argv[1])
 		qtdCol = int(sys.argv[2])
-	
-		generate = GenerateMatrix()
-		generate.generateMatrix(i, i)
+	'''
 		
 main()

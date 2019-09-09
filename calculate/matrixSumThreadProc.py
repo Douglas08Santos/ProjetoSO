@@ -32,11 +32,9 @@ class SumThreadProc(object):
         self.sem.release()
 
     def func(self,mR, mA, mB, i, j):
-        #mR.seek((i * len(mA[i]) + j)*4)
-        #mR.write(struct.pack('i', int(mA[i][j]) + int(mB[i][j])))
-        mR[i][j] = int(mA[i][j]) + int(mB[i][j])
+        mR.seek((i * len(mA[i]) + j)*4)
+        mR.write(struct.pack('i', int(mA[i][j]) + int(mB[i][j])))
         self.refreshVariable()
-
 
     def unroll(self, args, func, method, results):
         if method == "proc":
@@ -44,8 +42,9 @@ class SumThreadProc(object):
             for i in range(0, len(args[0])):
                 for j in range(0, len(args[0][0])):
                     pid = os.fork()
-                    if pid != 0:
+                    if pid == 0:
                         self.func(results, args[0], args[1], i, j)
+                        exit(0)
                         
         elif method == "thre":
             for i in range(0, len(args[0])):
@@ -57,27 +56,6 @@ class SumThreadProc(object):
             exit(1)
 
     def sumThread(self, matrixA, matrixB):
-        checkRow = len(matrixA) == len(matrixB)
-        checkCol = len(matrixA[0]) == len(matrixB[0])
-        if(checkRow and checkCol):
-            sizeMatrixR = len(matrixA)*len(matrixA[0])
-            matrixR = [[0]*len(matrixA[0])]*len(matrixA)
-
-            self.unroll([matrixA, matrixB], self.func, 'thre', matrixR)
-
-            while True:
-                self.sem.acquire()
-                self.instances.seek(0)
-                valueInstances = struct.unpack('i', self.instances.read(4))[0]
-                if valueInstances == 0:
-                    self.sem.release()
-                    break
-                self.sem.release()
-            #O problema que faltar está aqui
-            print("ListR: ",matrixR)                 
-
-        '''
-        #verifica condição para a soma
         result = None
         checkRow = len(matrixA) == len(matrixB)
         checkCol = len(matrixA[0]) == len(matrixB[0])
@@ -98,7 +76,6 @@ class SumThreadProc(object):
                     self.sem.release()
                     break
                 self.sem.release()
-            #O problema que faltar está aqui
             size = 'i'*(int(sizeMatrixR / 4))
             result = list(struct.unpack(size, matrixR))
             #print("ListR: ",result)
@@ -113,8 +90,8 @@ class SumThreadProc(object):
                   "Colunas: ", len(matriz[0]), ", ", len(matrizB[0]))
         posix_ipc.unlink_shared_memory('instances')
         posix_ipc.unlink_shared_memory('sem.test_sem')
-        return result
-        '''
+        return result   
+
     def sumProc(self, matrixA, matrixB):
         #verifica condição para a soma
         result = None
