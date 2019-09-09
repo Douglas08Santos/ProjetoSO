@@ -34,7 +34,7 @@ class GenerateMatrix(object):
 		output.close()
 		
 def main():
-	tam = list(range(10, 55, 5))
+	tam = list(range(10, 85, 5))
 	generate = GenerateMatrix()
 	for i in tam:		
 		generate.generateMatrix(i, i)

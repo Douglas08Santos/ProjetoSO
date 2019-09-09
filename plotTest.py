@@ -24,6 +24,8 @@ for filename in fileTimes:
 	print(len(xTempo))
 	plt.plot(yEntrada, xTempo, label = filename
 		[0:-4])
+	#plt.legend()
+	#plt.show() 
 
 # show a legend on the plot 
 plt.legend() 
