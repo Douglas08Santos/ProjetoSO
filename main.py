@@ -65,7 +65,7 @@ if len(sys.argv) == 2:
 		result = []		
 		#print(matrizA)
 		#print(matrizB)
-		for i in range(5):
+		for i in range(1):
 			start = time.time()
 			matrizR = main(mode, matrizA, matrizB)
 			#print(matrizR)

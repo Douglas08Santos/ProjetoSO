@@ -4,7 +4,7 @@ import mmap
 import signal
 import struct
 import posix_ipc
-import threading
+import threading 
 import sys
 
 class SumThreadProc(object):
@@ -32,8 +32,9 @@ class SumThreadProc(object):
         self.sem.release()
 
     def func(self,mR, mA, mB, i, j):
-        mR.seek((i * len(mA[i]) + j)*4)
-        mR.write(struct.pack('i', int(mA[i][j]) + int(mB[i][j])))
+        #mR.seek((i * len(mA[i]) + j)*4)
+        #mR.write(struct.pack('i', int(mA[i][j]) + int(mB[i][j])))
+        mR[i][j] = int(mA[i][j]) + int(mB[i][j])
         self.refreshVariable()
 
 
@@ -56,6 +57,26 @@ class SumThreadProc(object):
             exit(1)
 
     def sumThread(self, matrixA, matrixB):
+        checkRow = len(matrixA) == len(matrixB)
+        checkCol = len(matrixA[0]) == len(matrixB[0])
+        if(checkRow and checkCol):
+            sizeMatrixR = len(matrixA)*len(matrixA[0])
+            matrixR = [[0]*len(matrixA[0])]*len(matrixA)
+
+            self.unroll([matrixA, matrixB], self.func, 'thre', matrixR)
+
+            while True:
+                self.sem.acquire()
+                self.instances.seek(0)
+                valueInstances = struct.unpack('i', self.instances.read(4))[0]
+                if valueInstances == 0:
+                    self.sem.release()
+                    break
+                self.sem.release()
+            #O problema que faltar está aqui
+            print("ListR: ",matrixR)                 
+
+        '''
         #verifica condição para a soma
         result = None
         checkRow = len(matrixA) == len(matrixB)
@@ -93,7 +114,7 @@ class SumThreadProc(object):
         posix_ipc.unlink_shared_memory('instances')
         posix_ipc.unlink_shared_memory('sem.test_sem')
         return result
-
+        '''
     def sumProc(self, matrixA, matrixB):
         #verifica condição para a soma
         result = None
