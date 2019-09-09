@@ -38,14 +38,14 @@ class SumThreadProc(object):
 
 
     def unroll(self, args, func, method, results):
-        print("em unroll")
         if method == "proc":
+           
             for i in range(0, len(args[0])):
                 for j in range(0, len(args[0][0])):
                     pid = os.fork()
-                    if pid == 0:
+                    if pid != 0:
                         self.func(results, args[0], args[1], i, j)
-                        exit(0)
+                        
         elif method == "thre":
             for i in range(0, len(args[0])):
                 for j in range(0, len(args[0][0])):
@@ -108,7 +108,6 @@ class SumThreadProc(object):
             
            
             self.unroll([matrixA, matrixB], self.func, 'proc', matrixR)
-            print("chamando unroll")
             while True:
                 self.sem.acquire()
                 self.instances.seek(0)

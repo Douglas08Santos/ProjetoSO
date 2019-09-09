@@ -39,6 +39,6 @@ def main():
 		qtdCol = int(sys.argv[2])
 	
 		generate = GenerateMatrix()
-		generate.generateMatrix(qtdRow, qtdCol)
-
+		generate.generateMatrix(i, i)
+		
 main()

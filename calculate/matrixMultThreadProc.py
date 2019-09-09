@@ -41,7 +41,7 @@ class MultThreadProc(object):
         mR.seek((i * len(mA[i]) + j) * 4)
         result = 0
         for k in range(len(mB)):
-            result += mA[i][k] * mB[k][j] 
+            result += int(mA[i][k]) * int(mB[k][j]) 
         mR.write(struct.pack('i', result))
         self.refreshVariable()
 
